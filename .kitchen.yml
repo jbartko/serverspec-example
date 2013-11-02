@@ -1,0 +1,22 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+  use_vagrant_berkshelf_plugin: true
+  customize:
+    memory: 1512
+    cpus: 4
+
+platforms:
+- name: ubuntu12.04
+  driver_config:
+    box: ubuntu12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+
+suites:
+- name: mongorabbit
+  run_list: 
+    - recipe[mongodb::10gen_repo]
+    - recipe[mongodb]
+    - recipe[rabbitmq]
+  attributes:

@@ -1,3 +1,6 @@
+*.lock
+.kitchen
+
 *.gem
 *.rbc
 .bundle
