@@ -1,22 +1,18 @@
 ---
-driver_plugin: vagrant
+driver_plugin: docker
+
 driver_config:
-  require_chef_omnibus: true
-  use_vagrant_berkshelf_plugin: true
-  customize:
-    memory: 1512
-    cpus: 4
+  socket: <%= ENV['DOCKER_HOST'] || 'unix:///var/run/docker.sock' %>
+
+provisioner:
+  name: chef_zero
+  provision_command:
+  - apt-get install -y net-tools
 
 platforms:
-- name: ubuntu12.04
-  driver_config:
-    box: ubuntu12.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+- name: ubuntu-12.04
 
 suites:
-- name: mongorabbit
+- name: default
   run_list: 
-    - recipe[mongodb::10gen_repo]
-    - recipe[mongodb]
-    - recipe[rabbitmq]
-  attributes:
+    - recipe[mycookbook::nginx]

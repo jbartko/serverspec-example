@@ -1,4 +1,3 @@
-site :opscode
+source "https://supermarket.getchef.com"
 
-cookbook "mongodb", git: "https://github.com/edelight/chef-mongodb.git",      branch: "0.13.4"
-cookbook "rabbitmq", "2.3.2"
+metadata
